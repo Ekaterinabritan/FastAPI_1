@@ -31,7 +31,7 @@ async def root():
 
 
 @app.get('/items/', response_class=HTMLResponse)
-async def get_tasks(request: Request):
+async def get_items(request: Request):
     return templates.TemplateResponse('file.html', {'request': request, 'items': items, 'title': 'Item'})
 
 
@@ -39,7 +39,7 @@ async def get_tasks(request: Request):
 async def get_item(item_id: int = Path(..., ge=1, le=len(items))):
     for item in items:
         if item.id == item_id:
-            return task
+            return item
 
 
 @app.post('/items/', response_model=Item)
